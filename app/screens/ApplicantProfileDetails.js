@@ -2,7 +2,7 @@
 //For time being it will be set for the user once selected.
 // Ability to change role  can be added later. Need discussion.
 
-import React from "react";
+import React, { Component } from "react";
 import {
   View,
   ImageBackground,
@@ -14,32 +14,33 @@ import {
   TextInput,
 } from "react-native";
 
-import colors from "../config/colors";
+import firebase from "firebase";
 
-function ApplicantProfileDetails(props) {
-  return (
-    <SafeAreaView>
-      <Text style={styles.pageTitle}>Profile</Text>
-      <Text>Full Name</Text>
-      <TextInput></TextInput>
-      <Text>Mobile Number</Text>
-      <TextInput>For time being only Indian numbers</TextInput>
-      <Text>City</Text>
-      <TextInput>API or Manual or drop down</TextInput>
-      <Text>State</Text>
-      <TextInput>
-        drop down from states or from openmap API or manual list
-      </TextInput>
-      <Text>Education</Text>
-      <TextInput>
-        I can put drop down here,like year wise till 12th and then degree
-        details
-      </TextInput>
-      <Text>Experience</Text>
-      <TextInput></TextInput>
-      <Button title={"Save"}></Button>
-    </SafeAreaView>
-  );
+class ApplicantProfileDetails extends Component{
+  state = { user: {} };
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user != null) {
+        this.setState({user: user});
+      }
+    })
+  }
+  render(){
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
+          <View style={styles.container}>
+            <Text>{this.state.user.email}</Text>
+            <Button style={styles.signInText} title="Log Off" onPress={() => {
+              firebase.auth().signOut();
+            /*  analytics.identify("test", {
+                  email: "this.state.email"
+                });*/
+            }}/>
+          </View>
+        </SafeAreaView>
+    );
+  }
+  
 }
 
 const styles = StyleSheet.create({
