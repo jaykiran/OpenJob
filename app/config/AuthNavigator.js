@@ -4,10 +4,15 @@ import SignUpPage from '../screens/SignUpPage';
 import SignInPage from '../screens/SignInPage';
 import EmailSignUp from '../screens/EmailSignUp';
 import PhoneSignUp from '../screens/PhoneSignUp';
-//import InstaSignUp from '../screens/InstaSignUp';
-
+import InitialLanguageSelection from '../screens/InitialLanguageSelection';
+import AboutScreen from '../screens/AboutScreen';
+import InitialScreen from '../screens/InitialScreen';
 const AuthNavigator = createSwitchNavigator(
   {
+   
+    Launguage: { screen: InitialLanguageSelection },
+    Initial: { screen: InitialScreen },
+    About: { screen: AboutScreen },
     Loading: { screen: LoadingScreen },
     SignUp: { screen: SignUpPage },
     SignIn: { screen: SignInPage },
@@ -15,6 +20,6 @@ const AuthNavigator = createSwitchNavigator(
     Phone: { screen: PhoneSignUp },
     //Insta: { screen: InstaSignUp }
   },
-  { initialRouteName: 'Loading' }
+  { initialRouteName: 'Launguage' }
 );
 export default AuthNavigator;

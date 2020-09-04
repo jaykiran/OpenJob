@@ -38,26 +38,6 @@ class SignUpPage extends Component{
     }
   }
 
-  //instagram
-  constructor(props) {
-    super(props);
-    this.state = {
-      token: '',
-    };
-  }
- 
-  setIgToken = (data) => {
-    console.log('data', data)
-    this.setState({ token: data.access_token })
-  }
- 
-  onClear() {
-    CookieManager.clearAll(true)
-      .then((res) => {
-        this.setState({ token: null })
-      });
-  }
-
   //signin with facebook
   async signInWithFacebook() {
     try {
